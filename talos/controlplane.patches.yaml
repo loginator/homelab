@@ -1,0 +1,12 @@
+machine:
+  network:
+    interfaces:
+      - deviceSelector:
+          busPath: "0*"
+        dhcp: true
+        vip:
+          ip: 10.10.20.120
+cluster:
+  proxy:
+    extraArgs:
+      ipvs-strict-arp: true
