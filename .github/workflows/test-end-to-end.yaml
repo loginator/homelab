@@ -31,19 +31,9 @@ jobs:
           flux create kustomization flux-system \
           --source=flux-system \
           --path=./clusters/staging
-      - name: Install test secret
+      - name: Install sealed secrets key
         run: |
-          echo "${{secrets.TEST}}" | kubectl apply -f -
-          kubectl get secret
-      # - name: Install sealed secrets key
-      #   run: |
-      #     echo "${{ secrets.SEALED_SECRETS_CRT }}" > tls.crt
-      #     echo "${{ secrets.SEALED_SECRETS_KEY }}" > tls.key
-      #     kubectl -n sealed-secrets create secret generic sealed-secrets-key \
-      #       --from-file=tls.crt=tls.crt \
-      #       --from-file=tls.key=tls.key \
-      #       --type=kubernetes.io/tls \
-      #     kubectl -n sealed-secrets label secret sealed-secrets-key sealedsecrets.bitnami.com/sealed-secrets-key=active
+          echo "${{secrets.SEALED_SECRETS_TLS}}" | kubectl apply -f -
       - name: Verify cluster reconciliation
         run: |
           kubectl -n flux-system wait kustomization/infra-controllers --for=condition=ready --timeout=5m
