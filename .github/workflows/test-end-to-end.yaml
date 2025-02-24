@@ -36,7 +36,7 @@ jobs:
           kubectl -n sealed-secrets create secret generic sealed-secrets-key \
           --from-literal=tls.crt=${{ secrets.SEALED_SECRETS_CRT }} \
           --from-literal=tls.key=${{ secrets.SEALED_SECRETS_KEY }} \
-          --type=kubernetes.io/tls
+          --type=kubernetes.io/tls \
           --label=sealedsecrets.bitnami.com/sealed-secrets-key=active
       - name: Verify cluster reconciliation
         run: |
