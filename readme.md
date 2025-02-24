@@ -86,6 +86,29 @@ talosctl wipe disk sdb -n 10.10.20.124
 # FluxCD
 FluxCD is used to apply all of the configs
 
+## Install flux
+### Windows
+```powershell
+choco install flux
+```
+
+## Update flux
+### Windows
+```powershell
+choco upgrade flux
+```
+
+## Token permissions
+### GitHub fine-grained PAT
+Bootstrap can be run with a GitHub fine-grained personal access token, for repositories that are created ahead of time by an organization admin.
+
+The fine-grained PAT must be generated with the following permissions:
+
+Administration -> Access: Read-only
+Contents -> Access: Read and write
+Metadata -> Access: Read-only
+Note that Administration should be set to Access: Read and write when using bootstrap github --token-auth=false.
+
 ## Bootstrap the flux
 ```bash
 export GITHUB_TOKEN=<token>
