@@ -34,6 +34,7 @@ jobs:
       - name: Install test secret
         run: |
           echo "${{secrets.TEST}}" | kubectl apply -f
+          kubectl get secret
       # - name: Install sealed secrets key
       #   run: |
       #     echo "${{ secrets.SEALED_SECRETS_CRT }}" > tls.crt
