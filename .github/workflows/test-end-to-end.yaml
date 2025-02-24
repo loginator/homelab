@@ -33,7 +33,7 @@ jobs:
           --path=./clusters/staging
       - name: Install test secret
         run: |
-          echo "${{secrets.TEST}}" | kubectl apply -f
+          echo "${{secrets.TEST}}" | kubectl apply -f -
           kubectl get secret
       # - name: Install sealed secrets key
       #   run: |
