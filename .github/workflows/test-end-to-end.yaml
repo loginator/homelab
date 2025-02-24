@@ -39,7 +39,7 @@ jobs:
             --from-file=tls.crt=tls.crt \
             --from-file=tls.key=tls.key \
             --type=kubernetes.io/tls \
-            --label=sealedsecrets.bitnami.com/sealed-secrets-key=active
+          kubectl -n sealed-secrets label secret sealed-secrets-key sealedsecrets.bitnami.com/sealed-secrets-key=active
       - name: Verify cluster reconciliation
         run: |
           kubectl -n flux-system wait kustomization/infra-controllers --for=condition=ready --timeout=5m
