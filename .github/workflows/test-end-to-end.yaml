@@ -33,8 +33,8 @@ jobs:
           --path=./clusters/staging
       - name: Install sealed secrets key
         run: |
-          echo "${{ secrets.SEALED_SECRETS_CRT }}" tls.crt
-          echo "${{ secrets.SEALED_SECRETS_KEY }}" tls.key
+          echo "${{ secrets.SEALED_SECRETS_CRT }}" > tls.crt
+          echo "${{ secrets.SEALED_SECRETS_KEY }}" > tls.key
           kubectl -n sealed-secrets create secret generic sealed-secrets-key \
             --from-file=tls.crt=tls.crt \
             --from-file=tls.key=tls.key \
