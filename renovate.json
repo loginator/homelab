@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "kubernetes": {
+    "fileMatch": [
+      "\\.ya?ml$"
+    ]
+  },
+  "flux": {
+    "fileMatch": [
+      "(?:^|/)gotk-components\\.ya?ml$",
+      "apps/.+\\.ya?ml$",
+      "infrastructure/.+\\.ya?ml$",
+      "clusters/.+\\.ya?ml$"
+    ]
+  }
+}
