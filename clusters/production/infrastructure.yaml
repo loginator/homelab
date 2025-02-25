@@ -77,10 +77,11 @@ spec:
         name: cloudflare-clusterissuer
     - patch: |
         - op: add
-          path: /spec/values/service
+          path: /spec/values
           value:
-            type: LoadBalancer
-            loadBalancerIP: 10.10.20.136
+            service:
+              type: LoadBalancer
+              loadBalancerIP: 10.10.20.136
       target:
         kind: HelmRelease
         name: traefik
