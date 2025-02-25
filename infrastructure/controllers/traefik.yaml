@@ -47,3 +47,5 @@ spec:
             to: websecure
             scheme: https
             permanent: true
+    service:
+      type: NodePort
