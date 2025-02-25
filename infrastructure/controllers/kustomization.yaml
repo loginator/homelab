@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - sealed-secrets.yaml
   - renovate.yaml
+  - cert-manager.yaml
+  - traefik.yaml
