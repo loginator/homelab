@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: renovate
+  namespace: renovate
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: renovate
+  namespace: renovate
+spec:
+  schedule: "@hourly"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: renovate
+              image: renovate/renovate:latest
+              args:
+                - loginator/homelab
+              envFrom:
+                - secretRef:
+                    name: renovate-secret
+                - configMapRef:
+                    name: renovate-configmap
+          restartPolicy: Never
+---
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: renovate-configmap
+  namespace: renovate
+data:
+  RENOVATE_AUTODISCOVER: "false"
+  RENOVATE_GIT_AUTHOR: "Renovate Bot <bot@renovateapp.com>"
+  RENOVATE_PLATFORM: "github"
