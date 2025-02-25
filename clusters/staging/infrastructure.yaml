@@ -39,3 +39,11 @@ spec:
       target:
         kind: ClusterIssuer
         name: cloudflare-clusterissuer
+    - patch: |
+        - op: replace
+          path: /spec/values/service
+          value:
+            type: NodePort
+      target:
+        kind: HelmRelease
+        name: traefik
