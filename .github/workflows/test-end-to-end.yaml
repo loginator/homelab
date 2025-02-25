@@ -2,9 +2,13 @@ name: End to End test
 
 on:
   workflow_dispatch:
+  pull_request:
   push:
-    branches: [ '*' ]
-    tags-ignore: [ '*' ]
+    branches:
+      - main
+
+env:
+ BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   kubernetes:
@@ -24,7 +28,7 @@ jobs:
         run: |
           flux create source git flux-system \
           --url=${{ github.event.repository.html_url }} \
-          --branch=${GITHUB_REF#refs/heads/} \
+          --branch=${BRANCH_NAME} \
           --username=${GITHUB_ACTOR} \
           --password=${{ secrets.GITHUB_TOKEN }} \
           --ignore-paths="clusters/**/flux-system/"
