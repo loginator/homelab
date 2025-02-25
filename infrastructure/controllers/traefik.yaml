@@ -36,8 +36,8 @@ spec:
         enabled: true
         entryPoints: [web, websecure]
         matchRule: Host(`traefik-dashboard.talos.local.sandrolab.net`)
-        middlewares:
-        - name: traefik-auth-middleware
+        # middlewares:
+        # - name: traefik-auth-middleware
         tls:
           secretName: traefik-dashboard-certificate-secret
     ports:
