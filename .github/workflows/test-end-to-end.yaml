@@ -6,6 +6,10 @@ on:
   push:
     branches:
       - main
+
+env:
+ BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
 jobs:
   kubernetes:
     runs-on: ubuntu-latest
@@ -24,7 +28,7 @@ jobs:
         run: |
           flux create source git flux-system \
           --url=${{ github.event.repository.html_url }} \
-          --branch=${GITHUB_REF} \
+          --branch=${BRANCH_NAME} \
           --username=${GITHUB_ACTOR} \
           --password=${{ secrets.GITHUB_TOKEN }} \
           --ignore-paths="clusters/**/flux-system/"
