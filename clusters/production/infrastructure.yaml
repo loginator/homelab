@@ -50,6 +50,16 @@ spec:
   path: ./infrastructure/controllers
   prune: true
   wait: true
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/values
+          value:
+            service:
+              type: NodePort
+      target:
+        kind: HelmRelease
+        name: traefik
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -76,11 +86,12 @@ spec:
         kind: ClusterIssuer
         name: cloudflare-clusterissuer
     - patch: |
-        - op: replace
-          path: /spec/values/service
+        - op: add
+          path: /spec/values
           value:
-            type: LoadBalancer
-            loadBalancerIP: 10.10.20.136
+            service:
+              type: LoadBalancer
+              loadBalancerIP: 10.10.20.136
       target:
         kind: HelmRelease
         name: traefik
