@@ -50,6 +50,16 @@ spec:
   path: ./infrastructure/controllers
   prune: true
   wait: true
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/values
+          value:
+            service:
+              type: NodePort
+      target:
+        kind: HelmRelease
+        name: traefik
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
